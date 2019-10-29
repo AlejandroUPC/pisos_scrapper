@@ -5,6 +5,9 @@ import time
 
 
 def get_pagination_num(eq_area):
+    """
+        Gets the number of paginations needed. If no iteration item is found 2 is returned, so in the range (1,2) will run the iteration just once.
+    """
     if APP_CONFIG['wait_requests']:
         time.sleep(APP_CONFIG['second_between_reqs'])
         LOGGER.warning('Waiting {} between requests'.format(
@@ -20,11 +23,14 @@ def get_pagination_num(eq_area):
     try:
         get_num_pages = get_num_pages.findAll('a', {'class': 'item'})[-1].text
     except Exception:
-        get_num_pages = None
+        get_num_pages = 2
     return get_num_pages
 
 
 def extrat_page_html(eq_area, pag_num):
+    """
+        Gets the entire html page with all the listed flats.
+    """
     if APP_CONFIG['wait_requests']:
         time.sleep(APP_CONFIG['second_between_reqs'])
         LOGGER.warning('Waiting {} between requests'.format(
@@ -39,6 +45,9 @@ def extrat_page_html(eq_area, pag_num):
 
 
 def extract_details_page_html(str_link):
+    """
+        Gets the specific html page with the details for every flat.
+    """
     if APP_CONFIG['wait_requests']:
         time.sleep(APP_CONFIG['second_between_reqs'])
         LOGGER.warning('Waiting {} between requests'.format(

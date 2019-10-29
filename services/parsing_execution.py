@@ -7,6 +7,9 @@ from datetime import datetime
 
 
 def build_df(eq_area):
+    """
+        Builds the final df: makes the calls to first gathers the metadata and then the details.
+    """
     df_final = pd.DataFrame()
     get_num_pages = get_pagination_num(eq_area)
     if not get_num_pages:

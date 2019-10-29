@@ -25,8 +25,8 @@ def start_execution(area):
             df_temp = build_df(eq_area)
             if df_temp is not None:
                 df_global = df_global.append(df_temp, ignore_index=True)
-        df_global.to_csv('Global_{}.csv'.format(
-            now), index=False, encoding='cp1252')
+        df_global.to_csv('{}Global_{}.csv'.format(APP_CONFIG['results_folder'],
+                                                  now), encoding='cp1252')
     else:
         try:
             eq_area = PROV_DICT[area]
@@ -37,8 +37,8 @@ def start_execution(area):
             LOGGER.warning(
                 'Starting execution for area {}-{}'.format(area, eq_area))
             df_region = build_df(eq_area)
-            df_region.to_csv('data_{}_{}.csv'.format(eq_area, now),
-                             index=False, encoding='cp1252')
+            df_region.to_csv('{}data_{}_{}.csv'.format(APP_CONFIG['results_folder'], eq_area, now),
+                             encoding='cp1252')
 
 
 if __name__ == '__main__':

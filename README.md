@@ -12,13 +12,13 @@ All of the Python requierements needed to run this project can be found under th
 
 The project is built with the following submodules:
 
-1. Commons: Basic functions or dictionaries of the code that are called multiple times.
+1. Commons: Basic functions or dictionaries of the code that are called multiple times and global variables such as dictionaries for parsing.
 
-2. Configuration: The configuration dictionary, initialzing the configuraiton objects !**Please take the time and check the parameters before running the code for first time **!.
+2. Configuration: The configuration dictionary, initialzing the configuraiton objects ! **Please take the time and check the parameters before running the code for first time **!.
 
 3. Data access: All the operations regarding the data access for the project, mostly html requests.
 
-4. Output files: All the output folders from the results, such as csv's and log files shall be there.
+4. Output files: All the output folders from the results, such as csv, graphs and log files shall be there.
 
 5. Preprocessing: All the transformations of the data.
 
@@ -41,7 +41,7 @@ Examples:
 	`python cmd_app.py start-execution B`
 	
 	
-2. To retrieve all the data from all the provinces (warning takes a long time): 
+2. To retrieve all the data from all the provinces (**warning takes a long time**): 
 
 	`python cmd_app.py *`
 
@@ -49,4 +49,4 @@ Examples:
 
 * Please in order to avoid saturating the server set the flags to wait between request and a reasonable value in the configuration files.
 
-* The graph functions are mainly thought to work with datasets that contain all of the zones (used * as area).
+* The graph functions are thought to work with datasets that contain all of the zones (used * as area).
