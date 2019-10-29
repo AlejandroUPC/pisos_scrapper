@@ -2,7 +2,6 @@
 *.log
 .vscode/**
 *.ipynb
-output_files/**
 *.pbix
 .idea
 .pytest_cache
