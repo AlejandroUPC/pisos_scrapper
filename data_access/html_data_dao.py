@@ -1,20 +1,20 @@
 from bs4 import BeautifulSoup
 import requests
-from configuration.init_config import LOGGER, APP_CONFG
+from configuration.init_config import LOGGER, APP_CONFIG
 import time
 
 
 def get_pagination_num(eq_area):
-    if APP_CONFG['wait_requests']:
-        time.sleep(APP_CONFG['second_between_reqs'])
+    if APP_CONFIG['wait_requests']:
+        time.sleep(APP_CONFIG['second_between_reqs'])
         LOGGER.warning('Waiting {} between requests'.format(
-            APP_CONFG['second_between_reqs']))
+            APP_CONFIG['second_between_reqs']))
     page = requests.get(
-        'https://www.pisos.com/alquiler/{}/'.format(eq_area))
+        '{}alquiler/{}/'.format(APP_CONFIG['main_url'], eq_area))
     if page.status_code != 200:
         LOGGER.error('An error ocurred during handling request')
         return -1
-    soup = BeautifulSoup(page.content)
+    soup = BeautifulSoup(page.content, features="html.parser")
     get_num_pages = soup.find(
         'div', {'class': 'pager'})
     try:
@@ -25,28 +25,28 @@ def get_pagination_num(eq_area):
 
 
 def extrat_page_html(eq_area, pag_num):
-    if APP_CONFG['wait_requests']:
-        time.sleep(APP_CONFG['second_between_reqs'])
+    if APP_CONFIG['wait_requests']:
+        time.sleep(APP_CONFIG['second_between_reqs'])
         LOGGER.warning('Waiting {} between requests'.format(
-            APP_CONFG['second_between_reqs']))
+            APP_CONFIG['second_between_reqs']))
     page = requests.get(
-        'https://www.pisos.com/alquiler/{}/{}/'.format(eq_area, pag_num))
+        '{}/alquiler/{}/{}/'.format(APP_CONFIG['main_url'], eq_area, pag_num))
     if page.status_code != 200:
         LOGGER.error('An error ocurred during handling request')
         return -1
-    soup = BeautifulSoup(page.content)
+    soup = BeautifulSoup(page.content, features="html.parser")
     return soup
 
 
 def extract_details_page_html(str_link):
-    if APP_CONFG['wait_requests']:
-        time.sleep(APP_CONFG['second_between_reqs'])
+    if APP_CONFIG['wait_requests']:
+        time.sleep(APP_CONFIG['second_between_reqs'])
         LOGGER.warning('Waiting {} between requests'.format(
-            APP_CONFG['second_between_reqs']))
+            APP_CONFIG['second_between_reqs']))
     page = requests.get(
-        'https://www.pisos.com{}'.format(str_link.strip()))
+        '{}{}'.format(APP_CONFIG['main_url'], str_link.strip()))
     if page.status_code != 200:
         LOGGER.error('An error ocurred during handling request')
         return -1
-    soup = BeautifulSoup(page.content)
+    soup = BeautifulSoup(page.content, features="html.parser")
     return soup

@@ -1,6 +1,7 @@
 # Pisos_scrapper
 
 This is a project done during my Master in Data Science in UOC.
+
 It scraps information reagarding the price, among other parameters, for the rooms in all the avaiable regions of the website.
 
 ## Requierements
@@ -13,7 +14,7 @@ The project is built with the following submodules:
 
 1. Commons: Basic functions or dictionaries of the code that are called multiple times.
 
-2. Configuration: The configuration dictionary, initialzing the configuraiton objects and the requierements.
+2. Configuration: The configuration dictionary, initialzing the configuraiton objects !**Please take the time and check the parameters before running the code for first time **!.
 
 3. Data access: All the operations regarding the data access for the project, mostly html requests.
 
@@ -26,10 +27,26 @@ The project is built with the following submodules:
 ## CMD Execution
 
 The project is structured to be ran from the cmd_app.py file and pass the columns.
+
 The main function is named `start-execution` and it takes as a paramter area.
+
 Area is the shortname for the provinces of Spain where we can gather the data from, all the mapping can be found in commons/prov_dict.py.
+
 The code can be run for all the items in commons/prov_dict.py by setting using the paramter '*'.
 
 Examples:
-1. To retrieve all the data from Barcelona: `python cmd_app.py start-execution B`
-2. To retrieve all the data from all the provinces: `python cmd_app.py *`
+
+1. To retrieve all the data from Barcelona: 
+
+	`python cmd_app.py start-execution B`
+	
+	
+2. To retrieve all the data from all the provinces (warning takes a long time): 
+
+	`python cmd_app.py *`
+
+## Other comments
+
+* Please in order to avoid saturating the server set the flags to wait between request and a reasonable value in the configuration files.
+
+* The graph functions are mainly thought to work with datasets that contain all of the zones (used * as area).

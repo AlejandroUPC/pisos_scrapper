@@ -22,7 +22,7 @@ def read_metadata(eq_area, html_flat_list):
         descr = __clear_text_from_tag(
             item.find('div', {'class': 'description'}))
         extra_link = item.find('a', {'class': 'anuncioLink'})['href']
-        df_data = df_data.append(__parse_df_row('{};{};{};{};{}'.format(
+        df_data = df_data.append(__parse_df_row('{}^{}^{}^{}^{}'.format(
             unique_id.strip(), locatin, price, descr, extra_link.strip())), ignore_index=True)
     df_data.set_index(keys='Id', inplace=True)
     df_data['area'] = eq_area
@@ -42,7 +42,7 @@ def __clear_text_from_tag(str_item):
 
 
 def __parse_df_row(str_row_item):
-    Id, Location, Price, Descr, Link = str_row_item.split(';')
+    Id, Location, Price, Descr, Link = str_row_item.split('^')
     str_append = {'Id': Id, 'Location': Location,
                   'Price': Price, 'Descr': Descr, 'Link': Link}
     return str_append
