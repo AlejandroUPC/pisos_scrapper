@@ -8,7 +8,7 @@ COLS_DATA = ['Id', 'Location', 'Price', 'Descr', 'Link', 'superficieutil',
              'habitacionamueblada', 'numbanos', 'estadoconservacion', 'gastosincluidosalquiler']
 
 
-def read_metadata(html_flat_list):
+def read_metadata(eq_area, html_flat_list):
     list_flats = __extract_flat_divs(html_flat_list)
     df_data = pd.DataFrame(
         columns=COLS_DATA)
@@ -25,6 +25,7 @@ def read_metadata(html_flat_list):
         df_data = df_data.append(__parse_df_row('{};{};{};{};{}'.format(
             unique_id.strip(), locatin, price, descr, extra_link.strip())), ignore_index=True)
     df_data.set_index(keys='Id', inplace=True)
+    df_data['area'] = eq_area
     return df_data
 
 

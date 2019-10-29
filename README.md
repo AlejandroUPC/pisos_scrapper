@@ -1,2 +1,35 @@
-# pisos_scrapper
+# Pisos_scrapper
+
 This is a project done during my Master in Data Science in UOC.
+It scraps information reagarding the price, among other parameters, for the rooms in all the avaiable regions of the website.
+
+## Requierements
+
+All of the Python requierements needed to run this project can be found under the root folder in the file requierements.txt `pip3 install requierements.txt`.
+
+## Structure
+
+The project is built with the following submodules:
+
+1. Commons: Basic functions or dictionaries of the code that are called multiple times.
+
+2. Configuration: The configuration dictionary, initialzing the configuraiton objects and the requierements.
+
+3. Data access: All the operations regarding the data access for the project, mostly html requests.
+
+4. Output files: All the output folders from the results, such as csv's and log files shall be there.
+
+5. Preprocessing: All the transformations of the data.
+
+6. Services: Congregation of functions to be called from the main cmd.
+
+## CMD Execution
+
+The project is structured to be ran from the cmd_app.py file and pass the columns.
+The main function is named `start-execution` and it takes as a paramter area.
+Area is the shortname for the provinces of Spain where we can gather the data from, all the mapping can be found in commons/prov_dict.py.
+The code can be run for all the items in commons/prov_dict.py by setting using the paramter '*'.
+
+Examples:
+1. To retrieve all the data from Barcelona: `python cmd_app.py start-execution B`
+2. To retrieve all the data from all the provinces: `python cmd_app.py *`
