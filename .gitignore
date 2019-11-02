@@ -5,3 +5,4 @@
 *.pbix
 .idea
 .pytest_cache
+*.docx

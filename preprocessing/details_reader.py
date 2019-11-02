@@ -4,8 +4,10 @@ import requests
 from data_access.html_data_dao import extract_details_page_html
 from commons.details_dict import BASICDATA_DICT, INQDATA_DICT
 from commons.utils import text_parsing
+from configuration.init_config import LOGGER, APP_CONFIG
+from preprocessing.download_images import download_images
 
-CLSAS_PREFIX = r'icon icon-inline icon-default icon-{}'
+CLASS_PREFIX = r'icon icon-inline icon-default icon-{}'
 
 
 def add_details(df):
@@ -16,11 +18,11 @@ def add_details(df):
     for id_x in list_ids:
         details_html = extract_details_page_html(
             df.loc[id_x, 'Link'])
-        print('Checking url {}'.format(
-            df.loc[id_x, 'Link']))
         row_to_append = __parse_data(details_html)
         for keys in row_to_append:
             df.loc[id_x, keys] = row_to_append[keys]
+        if APP_CONFIG['donwload_flat_photos']:
+            download_images(details_html)
     return df
 
 
@@ -49,7 +51,7 @@ def __parse_individual_attr(str_html_data):
     TEMP_DICT = BASICDATA_DICT.fromkeys(BASICDATA_DICT, 0)
     for key in BASICDATA_DICT.keys():
         str_list_item = str_html_data.find(
-            'span', {'class': CLSAS_PREFIX.format(key)})
+            'span', {'class': CLASS_PREFIX.format(key)})
         if str_list_item:
             if BASICDATA_DICT[key] == 'NNS':
                 TEMP_DICT[key] = __extract_nns(str_list_item)
@@ -76,7 +78,7 @@ def __parse_individual_inq_attr(str_html_data):
     TEMP_DICT = INQDATA_DICT.fromkeys(INQDATA_DICT, 0)
     for key in INQDATA_DICT.keys():
         str_list_item = str_html_data.find(
-            'span', {'class': CLSAS_PREFIX.format(key)})
+            'span', {'class': CLASS_PREFIX.format(key)})
         if str_list_item:
             TEMP_DICT[key] = __extract_tns(str_list_item)
     return TEMP_DICT

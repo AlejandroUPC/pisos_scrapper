@@ -24,6 +24,24 @@ The project is built with the following submodules:
 
 6. Services: Congregation of functions to be called from the main cmd.
 
+## Configuration file
+
+Please before running the script read through this section and understand all of the fields on **configuraiton/main_configuratio.py**:
+
+* main_url: Defines the main url where the url's to request are built through the code.
+
+* wait_requests: Boolean value to set if you want a delay between every request.
+
+* second_between_reqs: Seconds to wait between requests, wait_request must be set to True.
+
+* results_folder: Path where the CSVs/graphs/images are saved.
+
+* plot_data: Boolean value to decide if the graphs are made after the all the data is gathered.
+
+* plot_data_file: File to be used to plot the data.
+
+
+
 ## CMD Execution
 
 The project is structured to be ran from the cmd_app.py file and pass the columns.

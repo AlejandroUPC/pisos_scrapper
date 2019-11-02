@@ -4,6 +4,7 @@ from data_access.html_data_dao import extrat_page_html, get_pagination_num
 from preprocessing.details_reader import add_details
 import pandas as pd
 from datetime import datetime
+from configuration.init_config import LOGGER
 
 
 def build_df(eq_area):
@@ -15,7 +16,8 @@ def build_df(eq_area):
     if not get_num_pages:
         return None
     for i in range(1, int(get_num_pages)):
-        print('Iteration {}'.format(i))
+        LOGGER.info('{0:.2%}'.format(i/int(get_num_pages)) + '' + ' for {} completed.'.format(
+            eq_area))
         data = extrat_page_html(eq_area, i)
         df = read_metadata(eq_area, data)
         asd = add_details(df)

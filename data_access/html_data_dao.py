@@ -8,15 +8,10 @@ def get_pagination_num(eq_area):
     """
         Gets the number of paginations needed. If no iteration item is found 2 is returned, so in the range (1,2) will run the iteration just once.
     """
-    if APP_CONFIG['wait_requests']:
-        time.sleep(APP_CONFIG['second_between_reqs'])
-        LOGGER.warning('Waiting {} between requests'.format(
-            APP_CONFIG['second_between_reqs']))
+    __wait_request()
     page = requests.get(
         '{}alquiler/{}/'.format(APP_CONFIG['main_url'], eq_area))
-    if page.status_code != 200:
-        LOGGER.error('An error ocurred during handling request')
-        return -1
+    __check_request(page)
     soup = BeautifulSoup(page.content, features="html.parser")
     get_num_pages = soup.find(
         'div', {'class': 'pager'})
@@ -31,15 +26,10 @@ def extrat_page_html(eq_area, pag_num):
     """
         Gets the entire html page with all the listed flats.
     """
-    if APP_CONFIG['wait_requests']:
-        time.sleep(APP_CONFIG['second_between_reqs'])
-        LOGGER.warning('Waiting {} between requests'.format(
-            APP_CONFIG['second_between_reqs']))
+
     page = requests.get(
         '{}/alquiler/{}/{}/'.format(APP_CONFIG['main_url'], eq_area, pag_num))
-    if page.status_code != 200:
-        LOGGER.error('An error ocurred during handling request')
-        return -1
+    __check_request(page)
     soup = BeautifulSoup(page.content, features="html.parser")
     return soup
 
@@ -48,14 +38,22 @@ def extract_details_page_html(str_link):
     """
         Gets the specific html page with the details for every flat.
     """
-    if APP_CONFIG['wait_requests']:
-        time.sleep(APP_CONFIG['second_between_reqs'])
-        LOGGER.warning('Waiting {} between requests'.format(
-            APP_CONFIG['second_between_reqs']))
+    __wait_request()
     page = requests.get(
         '{}{}'.format(APP_CONFIG['main_url'], str_link.strip()))
-    if page.status_code != 200:
-        LOGGER.error('An error ocurred during handling request')
-        return -1
+    __check_request(page)
     soup = BeautifulSoup(page.content, features="html.parser")
     return soup
+
+
+def __check_request(item_page):
+    if item_page.status_code != 200:
+        LOGGER.error('An error ocurred while handling the request')
+        return None
+
+
+def __wait_request():
+    if APP_CONFIG['wait_requests']:
+        time.sleep(APP_CONFIG['second_between_reqs'])
+        LOGGER.info('Waiting {} between requests'.format(
+            APP_CONFIG['second_between_reqs']))
