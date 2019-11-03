@@ -7,6 +7,7 @@ ENV_CONF = {
     "second_between_reqs": 5,
     "results_folder": "output_files/",
     # Logging info
+    "logs_format": "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     "log_file": "output_files/app_logs.log",
     # Graphs configuration
     "plot_data": True,

@@ -59,7 +59,7 @@ Examples:
 	`python cmd_app.py start-execution B`
 	
 	
-2. To retrieve all the data from all the provinces (**warning takes a long time**): 
+2. To retrieve all the data from all the provinces (**warning takes a long time, around 30 minutes**): 
 
 	`python cmd_app.py *`
 
