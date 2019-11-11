@@ -21,8 +21,6 @@ def add_details(df):
         row_to_append = __parse_data(details_html)
         for keys in row_to_append:
             df.loc[id_x, keys] = row_to_append[keys]
-        if APP_CONFIG['donwload_flat_photos']:
-            download_images(details_html)
     return df
 
 

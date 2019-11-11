@@ -11,8 +11,5 @@ ENV_CONF = {
     "log_file": "output_files/app_logs.log",
     # Graphs configuration
     "plot_data": True,
-    "plot_data_file": "output_files/Global_{}.csv".format(now),
-    # Images download config
-    "donwload_flat_photos": False,
-    "images_path": "output_files/flat_images/"
+    "plot_data_file": "output_files/_global_11-11-2019.csv"
 }

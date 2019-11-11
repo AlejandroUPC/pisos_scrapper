@@ -68,3 +68,5 @@ Examples:
 * Please in order to avoid saturating the server set the flags to wait between request and a reasonable value in the configuration files.
 
 * The graph functions are thought to work with datasets that contain all of the zones (used * as area).
+
+* Please note that the plot_data_file has to be set after the executon, for global always set the format to /_global_dd-mm-YYYY.csv'

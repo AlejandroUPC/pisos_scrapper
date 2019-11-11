@@ -22,13 +22,14 @@ def start_execution(area):
     is_list = is_areas_list(list_area)
     df_global = pd.DataFrame()
     if is_list:
-        for area in list_area:
-            eq_area = PROV_DICT[area]
+        for area_item in list_area:
+            eq_area = PROV_DICT[area_item]
             LOGGER.info(
                 'Starting execution for area: {}'.format(eq_area))
             df_temp = build_df(eq_area)
             if df_temp is not None:
                 df_global = df_global.append(df_temp, ignore_index=True)
+        area = 'global'
     else:
         eq_area = PROV_DICT[area]
         LOGGER.info(
